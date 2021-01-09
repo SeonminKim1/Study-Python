@@ -1,0 +1,125 @@
+<html>
+
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <script src="{{url_for('static', filename='vendor/jquery/jquery.slim.min.js')}}"></script>
+    <script src="{{url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" />
+    <link href="{{url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{url_for('static', filename='vendor/jquery/jquery.slim.min.js')}}" rel="stylesheet">
+</head>
+<style>
+    .navbar{
+        background-color: #4374D9;
+        padding-top:15px;
+        padding-bottom:15px;
+        padding-left:20px;
+        padding-right:20px;
+    }
+    .navbar a{
+        color:white;
+        font-weight:bold;
+    }
+</style>
+<body>
+
+<!-- navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+    <a class="navbar-brand" href="/">개발의민족</a>
+    <button aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"
+            data-target="#navbarResponsive" data-toggle="collapse" type="button">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/">Home<span class="sr-only">(current)</span></a>
+            </li>
+        <!-- 유저가 로그인 되어있는 상태라면-->
+        <!-- 로그아웃 -->
+        {% if userid %}
+            <li class="nav-item"><a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">{{ userid }}님</a></li>
+            <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+        <!-- 유저가 로그인 안되어있는 상태라면-->
+        <!-- 로그인 -->
+        {% else %}
+            <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
+        {% endif %}
+            <li class="nav-item">
+                <a class="nav-link" href="/register">Register</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/mypage">MyPage</a>
+            </li>
+        </ul>
+    </div>
+    </div>
+</nav>
+
+<!-- 본문 -->
+    <div class="container">
+        <center style="margin-top:60px"><h1>개발의 민족 도서 판매 사이트</h1></center>
+
+        <form class="form-inline d-flex">
+            <br><br><br><br><br><br><br><br>
+            <input class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" id="inputBookl" placeholder="도서검색" style="align-center;width:500px;height:50px;font-size:30px" type="text"/>
+            <img height="50" onclick="javascript:;window.open('http://www.naver.com');" src="{{url_for('static', filename='image/search.jpg')}}" width="50"/>
+        </form>
+        <p class = "navbar">
+            <img height="20" onclick="javascript:;window.open('http://www.naver.com');" src="{{url_for('static', filename='image/list.jpg')}}" width="20"/>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="http://naver.com">베스트셀러</a>
+            <a href="http://naver.com">신간도서</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="/it_book">컴퓨터</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="http://naver.com">자기개발</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="http://naver.com">경제/경영</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="http://naver.com">취업/수험서</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="http://naver.com">대학교재</a>
+        </p>
+
+        <div> <!-- Table -->
+        <table>
+            <tr>
+                <th><select name='age' size='1'>
+                    <option selected value=''>-- 연령 --</option>
+                    <option value='10대'>10대</option>
+                    <option value='20대'>20대</option>
+                    <option value='30대'>30대</option>
+                    <option value='40대'>40대</option>
+                    <option value='50대'>50대</option>
+                </select>
+                    <select name='sex' size='1'>
+                        <option selected value=''>-- 성별 --</option>
+                        <option value='남성'>남성</option>
+                        <option value='여성'>여성</option>
+                    </select>이 많이 주문한 도서<br><br>&nbsp;&nbsp;&nbsp;
+                    <img height="320" src="{{url_for('static', filename='image/book5.jpg')}}" width="250"/>&nbsp;&nbsp;&nbsp;
+                    <img height="320" src="{{url_for('static', filename='image/book6.jpg')}}" width="250"/>&nbsp;&nbsp;&nbsp;
+                    <img height="320" src="{{url_for('static', filename='image/book7.jpg')}}" width="250"/>&nbsp;&nbsp;
+                    <img height="320" src="{{url_for('static', filename='image/book8.jpg')}}" width="250"/>&nbsp;&nbsp;&nbsp;<br><br></th>
+            </tr>
+        </table>
+        <br>
+        <table>
+            <tr>
+                <th><p>전체 베스트 셀러 </p>&nbsp;&nbsp;&nbsp;
+                    <img height="320" src="{{url_for('static', filename='image/book1.jpg')}}" width="250"/>&nbsp;&nbsp;&nbsp;
+                    <img height="320" src="{{url_for('static', filename='image/book2.jpg')}}" width="250"/>&nbsp;&nbsp;&nbsp;
+                    <img height="320" src="{{url_for('static', filename='image/book3.jpg')}}" width="250"/>&nbsp;&nbsp;&nbsp;
+                    <img height="320" src="{{url_for('static', filename='image/book4.jpg')}}" width="250"/>&nbsp;&nbsp;&nbsp;<br><br>
+                    <div class="container2">
+                        <input name="" type="button" value="더보기"/> <br></div>
+                </th>
+            </tr>
+        </table>
+        </div> <!-- Table -->
+    </div>
+  </div>
+</body>
+
+</html>

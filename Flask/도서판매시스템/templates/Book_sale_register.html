@@ -1,0 +1,181 @@
+<html>
+
+<!-- bootstrap -->
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <script src="{{url_for('static', filename='vendor/jquery/jquery.slim.min.js')}}"></script>
+    <script src="{{url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" />
+    <link href="{{url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{url_for('static', filename='vendor/jquery/jquery.slim.min.js')}}" rel="stylesheet">
+    <title>개발의민족 도서판매 사이트</title>
+</head>
+
+<!-- css -->
+<style>
+div.row{ padding:10px; }
+div.register{ border:1px solid orange; border-radius: 2em;
+                padding-top:20px; padding-bottom:20px;
+                margin-right:80px; margin-left:80px;}
+    .navbar{
+        background-color: #4374D9;
+        padding-top:15px;
+        padding-bottom:15px;
+        padding-left:20px;
+        padding-right:20px;
+    }
+    .navbar a{
+        color:white;
+        font-weight:bold;
+    }
+</style>
+
+<body>
+<!-- navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+    <a class="navbar-brand" href="/">개발의민족</a>
+    <button aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"
+            data-target="#navbarResponsive" data-toggle="collapse" type="button">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/">Home<span class="sr-only">(current)</span></a>
+            </li>
+        <!-- 유저가 로그인 되어있는 상태라면-->
+        <!-- 로그아웃 -->
+        {% if userid %}
+            <li class="nav-item"><a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">{{ userid }}님</a></li>
+            <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+        <!-- 유저가 로그인 안되어있는 상태라면-->
+        <!-- 로그인 -->
+        {% else %}
+            <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
+        {% endif %}
+            <li class="nav-item">
+                <a class="nav-link" href="/register">Register</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/mypage">MyPage</a>
+            </li>
+        </ul>
+    </div>
+    </div>
+</nav>
+
+    <div class="container" align="center">
+        <br><br><h1>회원가입</h1><br>
+    <div class="row mt-5">
+      <div class="col-12">
+        <form method="POST" action="/register">
+          {{ form.csrf_token }}
+
+        <!-- 아이디 -->
+        <div class="form-group">
+          <div class="row">
+              <div class ="col" align="center">{{ form.userid.label("아이디") }}</div>
+              <div class ="col-6">{{ form.userid(class="form-control", placeholder="아이디") }}</div>
+              <div class ="col"><button type="submit" class="btn btn-primary" >중복확인</button></div>
+          </div>
+        </div>
+
+        <!-- 비밀번호 -->
+        <div class="form-group">
+          <div class="row">
+              <div class="col" align="center">{{ form.password.label("비밀번호") }}</div>
+              <div class="col-6">{{ form.password(class="form-control", placeholder="비밀번호") }}</div>
+              <div class="col"></div>
+          </div>
+        </div>
+
+        <!-- 비밀번호 확인 -->
+        <div class="form-group">
+          <div class="row">
+              <div class="col" align="center">{{ form.repassword.label("비밀번호 확인") }}</div>
+              <div class="col-6">{{ form.repassword(class="form-control", placeholder="비밀번호 확인") }}</div>
+              <div class="col"></div>
+          </div>
+        </div>
+
+        <!-- 사용자 이름 -->
+        <div class="form-group">
+          <div class="row">
+            <div class="col" align="center">{{ form.username.label("사용자 이름") }}</div>
+            <div class="col-6">{{ form.username(class="form-control", placeholder="이름") }}</div>
+            <div class="col"></div>
+          </div>
+        </div>
+
+        <!-- 나이 -->
+        <div class="form-group">
+          <div class="row">
+            <div class="col" align="center">{{ form.userage.label("나이") }}</div>
+            <div class="col-6">{{ form.userage(class="form-control", placeholder="나이") }}</div>
+            <div class="col"></div>
+          </div>
+        </div>
+
+        <!-- 성별 -->
+        <div class="row">
+            <div class="col" align="center">{{form.usergender.label('성별')}}</div>
+            <div class="col-2" align="center">
+                {{form.usergender()}}
+            </div>
+            <div class="col-7"></div>
+        </div>
+
+<!-- 연령대
+                <div class="row">
+                <div class="col" align="center"><label>연령대</label></div>
+                <div class="col-6" align="center">
+                    <select name="age">
+                        <option value="10대">10대</option>
+                        <option value="20대">20대</option>
+                        <option value="30대">30대</option>
+                        <option value="40대">40대</option>
+                    </select>
+                </div>
+                <div class="col"></div>
+            </div>
+        -->
+
+            <!-- 관심분야 -->
+            <div class="row">
+                <div class="col" align="center"><label>관심분야 <br>(최대 3개 선택가능) </label></div>
+                <div class="col-2" align="center">{{form.userinterest1()}}</div>
+                <div class="col-2" align="center">{{form.userinterest2()}}</div>
+                <div class="col-2" align="center">{{form.userinterest3()}}</div>
+<!--                    <table>
+                        <tr>
+                            <td width="80px"><input type="checkbox" name="chk_info" value="IT도서">IT도서</td>
+                            <td width="80px"><input type="checkbox" name="chk_info" value="인문학">인문학</td>
+                            <td width="80px"><input type="checkbox" name="chk_info" value="경영">경영</td>
+                        </tr>
+                        <tr>
+                            <td width="80px"><input type="checkbox" name="chk_info" value="소설">소설</td>
+                            <td width="80px"><input type="checkbox" name="chk_info" value="문학">문학</td>
+                            <td width="80px"><input type="checkbox" name="chk_info" value="예술">예술</td>
+                        </tr>
+                    </table>-->
+
+                <div class="col"></div>
+            </div>
+            <br>
+        <div align="center">
+          <button type="submit" class="btn btn-primary">가입하기</button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>
