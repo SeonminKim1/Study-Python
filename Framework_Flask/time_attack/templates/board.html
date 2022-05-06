@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--ajax 연결 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+</head>
+<script>
+    // 로그아웃은 내가 가지고 있는 토큰만 쿠키에서 없애면 됩니다.
+    function logout() {
+        $.ajax({
+            type: "GET",
+            url: '/logout',
+            data: {},
+            success: function (response) {
+                $.removeCookie('mytoken');
+                alert(response['msg'])
+                window.location.href = '/index'
+            }
+        })
+
+    }
+</script>
+
+
+<body>
+    <div>게시판 입니다</div>
+    <div>{{id}}
+        <button onclick=logout()>쿠키 삭제 해보기 -> unauthorized</button>
+</body>
+</html>

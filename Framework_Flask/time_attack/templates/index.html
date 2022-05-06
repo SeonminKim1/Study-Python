@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--ajax 연결 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+
+    <script>
+        function login() {
+            let id = $('#email').val()
+            let pwd = $('#pwd').val()
+
+            $.ajax({
+                type: "POST",
+                url: "/api/login",
+                data: {'email_give': id, 'pwd_give': pwd},
+                success: function (response) {
+                    if(response['result'] == 'success') {
+                        alert('토큰 생성 완료!')
+                        // 토큰이 정상적으로 발급되면, 토큰을 받아온다! 'token' 토큰을 받아 쿠키에 저장
+                        $.cookie('mytoken', response['token']);  //쿠키는 key:value 형태로 저장됨
+                        alert(response['msg']);
+                        window.location.replace('/index')
+                    } else {
+                        // 로그인 실패 시
+                        alert(response['msg']);
+                    }
+                }
+            })
+        }
+        function join() {
+            // 입력한 값들 가져와 변수에 저장
+            let email = $('#email').val()
+            let pwd = $('#pwd').val()
+            $.ajax({
+                type: "POST",
+                url: "/api/join",
+                data: {'email_give': email, 'pwd_give': pwd},
+                success: function (response) {
+                    alert(response["msg"])
+                    window.location.href = '/'
+                }
+            })
+        }
+    </script>
+    </script>
+</head>
+
+<body>
+    <div>
+        <div>
+            <input type="email" id="email" placeholder="사용자 이메일" size="10">
+        </div>
+        <div>
+            <input type="password" id="pwd" placeholder="비밀번호" size="10">
+        </div>        
+        <div>
+            <button onclick=join()>회원가입</button>
+        </div>
+        <div>
+            <button onclick=login()>로그인</button>
+        </div>
+</body>
+</html>
