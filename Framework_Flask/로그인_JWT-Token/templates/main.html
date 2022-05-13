@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- JQuery & Cookies -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+</head>
+
+<script>
+    function logout(){
+        $.removeCookie('mytoken');
+        alert('로그아웃 되었습니다')
+        window.location.href = '/login'
+    }
+</script>
+
+<body>
+    <h1> 메인 페이지입니다 </h1>
+    <h3> 로그인 성공 !! </h3>
+    <h3> 로그인 한 유저는 {{user.id}} 님 입니다.</h3>
+    <button class="logout_btn" onclick="logout()">로그아웃</button>
+</body>
+</html>

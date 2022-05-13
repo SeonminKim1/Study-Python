@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+    
+    <!--ajax 연결 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+</head>
+
+<script>
+    function login() {
+        let id = $('#id').val()
+        let pwd = $('#pwd').val()
+        $.ajax({
+            type: "POST",
+            url: "/api/login",
+            data: {'id': id, 'pwd': pwd},
+            success: function (response){
+                alert(response['msg'])
+                alert('토큰 생성 완료!')
+
+                // Token을 받아 쿠키에 저장
+                $.cookie('mytoken', response['token']);  // 쿠키 key:value 형태 저장
+                if (response['success']){ // success 가 1일 때만
+                    window.location.replace('/main')
+                }
+            }
+        })
+    }
+</script>
+
+<body>
+    <article class="container">
+        <div class="box_login">
+            <input class="input_login" type="text" id="id" placeholder="아이디"> <!-- input id -->
+            <input class="input_login" type="password" id="pwd" placeholder="비밀번호"> <!-- input pw -->
+            <button class="button" onclick="login()">로그인</button> <!-- button -->
+            <p class="text_join_link">계정이 없으신가요? <a href="/join">가입하기</a></p>
+        </div>
+    </article>
+</body>
+</html>
