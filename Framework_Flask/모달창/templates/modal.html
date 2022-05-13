@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/modal.css') }}">
+
+</head>
+<script>
+    function modal_overlay_on() {
+        document.querySelector('.overlay').style.display = 'block';
+        document.querySelector('.modal_container').style.display = 'block';
+        // document.querySelector('.overlay').style.top = window.pageYOffset + 'px'; // Modal 창 현재 보고있는 창에서 뜨게
+    }
+    function modal_overlay_off(){ // overlay가 맨위로 올라오므로 overlay에 event
+        document.querySelector('.overlay').style.display = 'none';
+        document.querySelector('.modal_container').style.display = 'none';
+        // document.querySelector('.overlay').style.top = window.pageYOffset + 'px'; // Modal 창 현재 보고있는 창에서 뜨게
+    }
+</script>
+
+<body>
+    <div>
+        <h1> 모달창을 띄워 보겠습니다. </h1>
+        <button onclick = "modal_overlay_on()">모달 창 클릭 Button</button>
+    </div>
+
+    <div class = 'overlay' onclick="modal_overlay_off()">
+        <div class = 'modal_container'>
+            <h3 id = "modal_content"> 모달입니다~ </h3>          
+        </div>
+    </div>
+</body>
+</html>
