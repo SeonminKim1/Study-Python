@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html><body>
+    <h1>1. 반복문</h1>
+    <ul>
+    {% for an in animals %}
+        <li>{{ an }}</li>
+    {% endfor%}
+    </ul>
+
+    <h1>2. Dicionary 반복문</h1>
+    <ul>
+        {% for key, value in fruits.items() %}
+            <li>{{ key }} : {{ value }}개</li>
+        {% endfor%}
+    </ul>
+
+    <h1>3. List 내 Dicionary Value 기준 반복문</h1>
+    <ul>
+        {% for attr in multis | sort(attribute='rating')%}
+            <li>{{ attr }}</li>
+        {% endfor%}
+    </ul>
+</body></html>
