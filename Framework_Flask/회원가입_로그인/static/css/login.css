@@ -1,0 +1,45 @@
+.container {
+    height:300px;
+    width: 500px;
+    margin: auto;
+    border:1px solid black;
+    background-color:  white;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box_login {
+    position: relative;
+    text-align: center;
+    width: 350px;
+    background-color: #FFFFFF;
+}
+
+.input_login {
+    height: 40px;
+    width: 250px;
+    margin: 3px;
+    color: #8E8E8E;
+    background-color: #FAFAFA;
+    outline: none;
+}
+
+.button {
+    height: 30px;
+    width: 150px;
+    background-color: #0095F6;
+    color: #FFFFFF;
+    margin-top: 20px;
+    outline: none;
+    cursor: pointer;
+}
+
+.text_join_link {
+    font-weight: 600;
+    text-align: center;
+}
+
+.text_join_link > a {
+    color: #0095F6;
+}

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/join.css') }}">
+
+    <!--ajax 연결 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+</head>
+
+<script>
+    function join() {
+        let id = $('#id').val()
+        let name = $('#name').val()
+        let nickname = $('#nickname').val()
+        let pwd = $('#pwd').val()
+        $.ajax({
+            type: "POST",
+            url: "/api/join",
+            data: {'id': id, 'name': name, 'nickname': nickname, 'pwd': pwd},
+            success: function (response) {
+                alert(response["msg"]) 
+                if (response['success']){ // success 가 1일 때만
+                    window.location.replace('/login')
+                }
+            }
+        })
+    }
+</script>
+
+<body>
+    <article class="container">
+        <div class="box_join">
+            <input class="input_join" type="email" id="id" placeholder="이메일">
+            <input class="input_join" type="text" id="name" placeholder="이름">
+            <input class="input_join" type="text" id="nickname" placeholder="닉네임">
+            <input class="input_join" type="password" id="pwd" placeholder="비밀번호">
+            <button class="button" onclick="join()">가입</button>
+            <p class="text_login_link">계정이 있으신가요? <a href="/login">로그인</a></p>
+        </div>
+    </article>
+</body>
+</html>
