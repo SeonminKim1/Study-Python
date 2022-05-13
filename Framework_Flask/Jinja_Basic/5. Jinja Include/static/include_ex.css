@@ -1,0 +1,27 @@
+
+.nav_box{
+    display:flex;
+    flex-direction: row;
+    justify-content:space-between;
+    height:50px;
+    width:100%;
+    background-color: coral;
+}
+
+#div_box
+{
+    height:50px;
+    width:600px;
+    display:flex;
+    flex-direction: row;
+}
+
+#div1{
+    background-color: aquamarine;
+    margin:5px;
+}
+
+#div2{
+    background-color: yellowgreen;
+    margin:5px;
+}
