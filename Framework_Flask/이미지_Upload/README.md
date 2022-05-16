@@ -19,9 +19,10 @@
 - @app.route('/fileupload', methods=['POST'])
 
 ### 기능 스크린샷
-<table>
-<th><td></td><td>File Ver</td><td>Modal ver</td></th>
-<tr><td>![1.PNG](readme_img/1.PNG)</td><td>![2.PNG](readme_img/2.PNG)</td><td>![3.PNG](readme_img/3.PNG)</td></tr>
-</table>
 
+#### File Ver
+<img src="./readme_img/2.PNG" width="350px" height="250px"/>
+
+#### Modal ver
+<img src="./readme_img/3.PNG" width="350px" height="250px"/>
 
