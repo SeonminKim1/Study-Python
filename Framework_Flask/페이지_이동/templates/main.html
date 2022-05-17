@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<script>
+    function btn_onclick1(){ // get 방식
+        window.location.href = "/test/basic" // api endpoint로 이동
+    }
+
+</script>
+<body>
+    <h1>Flask 페이지 이동하기</h1>
+    <h3>1. a 태그 이동 방식</h3>
+    <div><a href="/test/basic">a 태그로 이동</a></div> 
+
+    <h3>2. a 태그 + url_for() 방식</h3>
+    <div><a href="{{url_for('test_name', name ='홍길동')}}" id = "a_" >a 태그 + Url_for</a></div>
+    
+    <h3>3. Button 태그 + JS - window.location.href 방식</h3>
+    <div><button type="button" id="btn1" onclick="btn_onclick1()">Button</button></div>
+
+    <h3>4. Form - Submit 방식</h3>
+    <div><form action="/test/animals" method="POST">
+        <input type="text" name="nm"/>
+        <button type="submit">Button</button>
+    </form></div>
+
+    <h3>5. Redirect </h5>
+        <div><a href="/test/redir">redirect로 /test/animal에 이동</a></div>
+</body>
+</html>
