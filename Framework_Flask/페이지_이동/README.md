@@ -5,7 +5,7 @@
 │   └── test.html 
 └── app.py          // 진입점
 ``` 
-### 페이지 이동 방법 4가지
+### 페이지 전환 방법 5가지
 - [GET] a 태그 href 속성
 - [GET] a 태그 href 속성 + url_for()
 - [GET] JS onclick + window.location.href 방식
