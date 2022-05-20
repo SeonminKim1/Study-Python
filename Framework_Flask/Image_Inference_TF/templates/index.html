@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/static/css/main.css">
+
+    <!--ajax 연결 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+
+</head>
+<script>
+    function posting() {
+        let file = $('#file')[0].files[0]
+        //let filename = file['name']
+        let form_data = new FormData() // FormData 처럼 보내는 방식
+        //form_data.append("f_name", filename)
+        form_data.append("file", file)
+        console.log(file, typeof (file))
+        $('#upload_img').attr("src", window.URL.createObjectURL(file));
+        $('#answer_label').text("추론중")
+        //console.log(filename, typeof(filename)) // test3.jpg
+        $.ajax({ // 비동기 방식
+            type: "POST",
+            url: "/api/img/upload",
+            data: form_data,
+            contentType: false,
+            processData: false,
+            success: function (response) {
+                alert(response['msg'])
+                results = response["answer"]
+                $('#answer_label').text('정답은 ' + results)
+            }
+        });
+    }
+
+</script>
+<body>
+    <div>
+        <div>
+            <label for="file" class="btn btn_blue">파일 선택</label>
+            <input id="file" type="file">
+            <button type="button" onclick="posting()">업로드 하기</button>
+        </div>
+        <div>
+            <img id="upload_img" src=""/>
+        </div>            
+        <div>
+            <label id="answer_label">정답 : </label>
+        </div>
+    </div> <!-- container -->
+</body>
+</html>
