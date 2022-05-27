@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!--ajax 연결 -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+</head>
+
+<script>
+  function posting() {
+    let file = $('#file')[0].files[0]
+    let form_data = new FormData() // FormData 처럼 보내는 방식
+    form_data.append("file", file)
+
+    $.ajax({ // 비동기 방식
+        type: "POST",
+        url: "/fileupload",
+        data: form_data,
+        contentType: false,
+        processData: false,
+        success: function (response) {
+            alert(response["result"])
+        }
+    });
+  }
+</script>
+<body>
+  <h1> 1. 파일로 동영상 업로드 하기 </h1>
+  <div id="file_div">
+    <input id="file" type="file">
+    <button class='btn' onclick="posting()">업로드</button>
+  </div>
+</body>
+</html>
