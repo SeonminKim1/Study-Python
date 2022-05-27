@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+</head>
+
+<body>
+    <section>
+        <div class="ranking_box">
+            {% set page_count = (ranking_list|length)//page_unit %} <!-- page 수 -->
+            {% set start = page_count*(page_num-1) %}               <!-- 글 시작 번호 -->
+            {% set result_list = ranking_list[start : start+4] %}   <!-- 출력할 글 -->
+            <table>
+                <tr><th>name</th><th>score</th><th>date</th></tr>
+                <!-- 글 출력 -->
+                {% for result in result_list %}
+                    <tr><td>{{result['name']}}</td><td>{{result['score']}}</td><td>{{result['date']}}</td></tr>
+                {% endfor %}
+            </table>
+            <!-- 글 페이지 번호 -->
+            {% for i in range(1, (page_count)+2)%}
+                <a href="/?page_num={{ i }}">{{i}}</a>
+            {% endfor %}
+        </div>
+    </section>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!--ajax 연결 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+
+</head>
+
+<body>
+
+<section>
+    <div class="container">
+        <div class="ranking_box">
+            <table>
+                <tr>
+                    <td>순위</th>
+                    <th>기업명</th>
+                    <th>안전 지수</th>
+                </tr>
+                {% set indexs = 0 %}
+                {% for rank in ranking %}
+                    <tr class="is_safe_{{ rank.is_safe }}">
+                        {% set indexs = (p.current_page - 1) * 10 + loop.index %}
+                        <th>{{ indexs }}</th>
+                        <th>{{ rank.company }}</th>
+                        <th>{{ rank.score }}</th>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div class="page_btn">
+            {% if p.start_page > p.page_block %}
+                <a class="previous_btn" href="/ranking/?page={{ p.start_page - p.page_block }}">이전</a>
+            {% endif %}
+            {% for i in range(p.start_page, p.end_page) %}
+                <a href="/ranking/?page={{ i }}"> {{ i }} </a>
+            {% endfor %}
+            {% if p.end_page < p.page_count %}
+                <a class="next_btn" href="/ranking/?page={{ p.start_page + p.page_block }}">다음</a>
+            {% endif %}
+        </div>
+    </div> <!-- container -->
+</section>
+
+</body>
+</html>
