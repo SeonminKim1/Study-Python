@@ -1,0 +1,42 @@
+<!Doctype html>
+<html lang="ko">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    </style>
+    <script>
+        function save() {
+            var form_data = new FormData($('#upload-file')[0]);
+            
+            $.ajax({
+                type: 'POST',
+                url: '/fileupload',
+                data: form_data,
+                processData: false,
+                contentType: false,
+                success: function (data) {
+                    alert("파일이 업로드 되었습니다!!");
+                },
+            });
+        }
+    </script>
+
+</head>
+
+<body>
+<div class="wrap">
+    <h2> 파일 업로드 </h3>
+    <form id = "upload-file">
+        <label for="post-url">이미지 파일</label>
+        <input type="file" name="file"/>
+    </form>
+    <button type="button" onclick="save()">저장</button>
+</div>
+</body>
+</html>
