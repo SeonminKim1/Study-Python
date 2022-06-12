@@ -1,0 +1,33 @@
+<html>
+    <head>
+        <meta name="csrf_token" content="{{ csrf_token }}">
+        <!-- Jquery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    </head>
+    <script>
+        function put_score() {
+            var csrftoken = document.querySelector("meta[name=csrf_token]").content
+            var score = document.getElementById("score").value
+            console.log(score)
+            $.ajax({ // 비동기 방식
+                type: "POST",
+                dataType: "JSON",
+                contentType: "application/json; charset=utf-8",
+                url: "/score/",
+                data: JSON.stringify({'score': score}),
+                headers: {"X-CSRFToken": csrftoken},
+                success: function (response) {
+                    alert(response["msg"])
+                }
+            });
+        }
+    </script>
+
+    <body>
+        <div>
+            <label for="score">점수를 입력하세요</label><input type="text" id="score">
+        </div>
+        <button class="score-btn" onclick="put_score()">점수 제출</button>
+    </body>
+
+</html>
