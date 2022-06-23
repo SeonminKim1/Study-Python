@@ -3,7 +3,7 @@ from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 
 # custom user model 사용 시 UserManager 클래스와 create_user, create_superuser 함수가 정의되어 있어야 함
 class UserManager(BaseUserManager):
-    def create_user(self, email, password=None, job=None):
+    def create_user(self, email, password=None):
         if not email:
             raise ValueError('Users must have an email')
         user = self.model(
@@ -14,20 +14,19 @@ class UserManager(BaseUserManager):
         return user
     
     # python manage.py createsuperuser 사용 시 해당 함수가 사용됨
-    def create_superuser(self, email, password=None, job=None):
+    def create_superuser(self, email, password=None):
         user = self.create_user(
             email=email,
             password=password,
         )
         user.is_admin = True
-        user.job=job
         user.save(using=self._db, commit=False)
         return user
 
 class UserType(models.Model):
-    type = models.CharField('직업', max_length=20, unique=True, null=False)
+    user_type = models.CharField('직업', max_length=20)
     def __str__(self):
-        return self.type
+        return self.user_type
 
 class User(AbstractBaseUser):
     username = models.CharField("사용자 계정", max_length=20, unique=True)
