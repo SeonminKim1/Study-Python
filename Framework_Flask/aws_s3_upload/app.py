@@ -11,6 +11,8 @@ def main():
 def file_upload():
     file = request.files['file']
     print(file)
+    print('===type file===', type(file))
+    print('====', file.content_type, type(file.content_type))
     s3 = boto3.client('s3')
     # s3 = 	boto3.client('s3', aws_access_key_id = AWS_ACCESS_KEY, aws_secret_access_key = AWS_SECRET_KEY)
     s3.put_object(
