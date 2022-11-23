@@ -4,7 +4,6 @@
 
 ```
 $ pip install fastapi-mail python-dotenv
-
 ```
 
 ### Make gmail app password
@@ -22,10 +21,14 @@ MAIL_SERVER=smtp.gmail.com
 ```
 
 ### API TEST
+
+#### Method
 ```
 $ POST - http://127.0.0.1:8000/mail/api
 $ POST - http://127.0.0.1:8000/mail/api/backgroundtasks
+```
 
+#### Body
 ```
 {
     "subject" : "메일 제목",
