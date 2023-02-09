@@ -25,5 +25,8 @@ async def main2():
     await task2
     print(f"2. finished at {time.strftime('%X')}")
 
+print('=== main1 test ===')
 asyncio.run(main1())
+
+print('=== main2 test ===')
 asyncio.run(main2())
