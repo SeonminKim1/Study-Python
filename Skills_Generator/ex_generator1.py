@@ -1,4 +1,4 @@
-#제네레이터 생성
+# Generator 생성
 def ex_func1(nums):
     for i in nums:
         yield i * i
